@@ -8,21 +8,17 @@ public:
     int t=target-nums[i];
     
     if(mp.count(t)>0){
-        s=t;
-        y=i;
-       
+        
+        
+        v.push_back(i);
+        v.push_back(mp[t]);
         break;
     }
     else{
         mp[nums[i]]=i;
     }
 }
-for(auto i:mp){
-    if(i.first==s){
-        v.push_back(i.second);
-        v.push_back(y);
-}
-}
+
 return v;
     }
 };
