@@ -7,9 +7,7 @@ public:
         sum+=root->val;
         v.push_back(root->val);
         if(!root->left&&!root->right){
-            if(sum==key){
-                v1.push_back(v);
-            }
+            if(sum==key) v1.push_back(v);
         }
         pre(root->left,v,key);
         pre(root->right,v,key);
