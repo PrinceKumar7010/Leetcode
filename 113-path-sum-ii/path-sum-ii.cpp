@@ -13,7 +13,7 @@ public:
         }
         pre(root->left,v,key);
         pre(root->right,v,key);
-        if(!v.empty()) v.pop_back();
+        v.pop_back();
         sum-=root->val;
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
