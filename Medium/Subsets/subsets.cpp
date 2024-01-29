@@ -10,29 +10,31 @@ using namespace std;
 
 class Solution
 {
-    
     public:
     
-    void sub (vector<int> &A,int i,vector<int> &B,vector<vector<int> > &ans){
+    void sub(int i,vector<int>& A,vector<int>& C,vector<vector<int>>&B){
         
-        if(i==A.size()){
-            ans.push_back(B);
-            return ;
+        if(A.size()==i){
+         B.push_back(C);
+        
+            return;
         }
-        B.push_back(A[i]);
-        sub(A,i+1,B,ans);
+        C.push_back(A[i]);
         
-        B.pop_back();
-        sub(A,i+1,B,ans);
+        sub(i+1,A,C,B);
+        C.pop_back();
+        sub(i+1,A,C,B);
         
-    }
-    
+        
+    } 
     vector<vector<int> > subsets(vector<int>& A)
-    {   vector<vector<int> > ans;
-        vector<int> B;
-        sub(A,0,B,ans);
-        sort(ans.begin(),ans.end());
-        return ans;
+    {   vector<int>  C;
+        vector<vector<int> > B;
+        
+        sub(0,A,C,B);
+        sort(B.begin(),B.end());
+        return B;
+       
     }
 };
 
