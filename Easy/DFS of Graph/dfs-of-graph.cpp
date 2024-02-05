@@ -5,24 +5,30 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-   void dfs(int i, vector<bool> &vis, vector<int> &v,vector<int> adj[]){
-       vis[i]=true;
-       v.push_back(i);
-       for(auto x: adj[i]){
-           if(vis[x])continue;
-           dfs(x,vis,v,adj);
-       }
-   }
-   vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-       vector<bool> vis(V+1,false);
-        vector<int> v;
-       for(int h=0;h<V;h++){
-           if(!vis[h]){
-               dfs(h,vis,v,adj);
-           }
-       }
+    
+    void dfs(int source, vector<int> adj[],vector<int> &v,int visited[]){
+        visited[source]=1;
+        v.push_back(source);
+        for(int nbr : adj[source]){
+            if(!visited[nbr])dfs(nbr,adj,v,visited);
+           
+            
+        }
+        
+        
+    }
+   
+   
+   
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+         vector<int> v;
+             int visited[V]={0};
+        int source=0;
+     
+        
+        dfs(source,adj,v,visited);
         return v;
-       
+        
     }
 };
 
