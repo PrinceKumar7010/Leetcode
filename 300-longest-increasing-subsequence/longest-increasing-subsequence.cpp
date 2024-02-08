@@ -1,15 +1,29 @@
-class Solution { 
+class Solution {
 public:
+
+    int ln(vector<int>& nums,vector<vector<int>> &dp,int ind,int pre,int n)
+{
+    if(ind==n){
+        return 0;
+    }
+    if(dp[ind][pre+1]!=-1){
+        return dp[ind][pre+1];
+    }
+    int ntake=0+ln(nums,dp,ind+1,pre,n);
+int take=0;
+if(pre==-1 || nums[pre]<nums[ind]){
+take=1+ln(nums,dp,ind+1,ind,n);
+}
+    
+    
+   return dp[ind][pre+1]=max(take,ntake);
+
+}
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> sub;
-        for (int x : nums) {
-            if (sub.empty() || sub[sub.size() - 1] < x) {
-                sub.push_back(x);
-            } else {
-                auto it = lower_bound(sub.begin(), sub.end(), x); // Find the index of the first element >= x
-                *it = x; // Replace that number with x
-            }
-        }
-        return sub.size();
+         int n=nums.size();
+         vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+       int ind=0;
+       
+        return ln(nums,dp,ind,ind-1,n);
     }
 };
