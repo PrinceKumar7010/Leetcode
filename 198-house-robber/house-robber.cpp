@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int robhouse(int i,vector<int> &nums,vector<int> &dp)
-    {
-        if(i>=nums.size())
-        {
-            return 0;
-        }
-        if(dp[i]!=-1)
-        {
-            return dp[i];
-        }
-        int rob = nums[i] + robhouse(i+2,nums,dp);
-        int notrob = robhouse(i+1,nums,dp);
-        return dp[i] = max(rob,notrob);
-    }
+
+
+   int hou(vector<int>& nums,int i, vector<int> &dp){
+     if(i>=nums.size())return 0;
+     if(dp[i]!=-1)return dp[i];
+     return dp[i]=max(hou(nums,i+1,dp),hou(nums,i+2,dp)+nums[i]);
+   }
+   
+
     int rob(vector<int>& nums) {
         vector<int> dp(nums.size(),-1);
-        return robhouse(0,nums,dp);
+       return hou(nums,0,dp);
     }
 };
