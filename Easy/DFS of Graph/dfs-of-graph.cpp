@@ -6,27 +6,26 @@ using namespace std;
 class Solution {
   public:
     
-    void dfs(int source, vector<int> adj[],vector<int> &v,int visited[]){
-        visited[source]=1;
-        v.push_back(source);
-        for(int nbr : adj[source]){
-            if(!visited[nbr])dfs(nbr,adj,v,visited);
-           
+    
+    void dfs(int source,vector<bool> &vis, vector<int> &v,vector<int> adj[]){
+        
+       
+        vis[source]=true;
+     v.push_back(source);
+        for(int i  : adj[source]){
+            if(!vis[i])dfs(i,vis,v,adj);
             
         }
         
         
     }
-   
-   
-   
-    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-         vector<int> v;
-             int visited[V]={0};
-        int source=0;
-     
+    
+    
+     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+          vector<int> v;
+        vector<bool> vis(V,false);
+        dfs(0,vis,v,adj);
         
-        dfs(source,adj,v,visited);
         return v;
         
     }
