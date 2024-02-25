@@ -1,24 +1,14 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        
-        int n=prices.size();
-        int mx=prices[n-1];
-        vector<int> v(n+1,-1);
-        v[n-1]=mx;
-        for(int j=n-2;j>=0;j--){
-           
-            mx=max(mx,prices[j]);
-            v[j]=mx;
+    int maxProfit(vector<int>& arr) {
+       int mini=arr[0];
+       int cur=0,mx=0;
+       for(int i=0;i<arr.size();i++){
+         cur=arr[i]-mini;
+         mx=max(mx,cur);
+         mini=min(mini,arr[i]);
 
-        }
-        for(auto i:v){
-            cout<<i<<" ";
-        }
-        int y=0;
-        for(int i=0;i<prices.size();i++){
-            y=max(y,v[i]-prices[i]);
-        }
-        return y;
+       } 
+       return mx;
     }
 };
