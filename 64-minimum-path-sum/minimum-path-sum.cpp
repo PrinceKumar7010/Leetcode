@@ -1,17 +1,18 @@
 class Solution {
 public:
-    int minPathSum(vector<vector<int>>& grid) {
-        int row = grid.size();
-        int col = grid[0].size();
-        vector<vector<int>> dp (row,vector<int>(col,-1));
-        dp[0][0] = grid[0][0];
-        path(row-1,col-1,grid,dp);
-        return dp[row-1][col-1];
+    
+    int path(int i,int j,int m,int n,vector<vector<int>>& dp,vector<vector<int>>& grid){
+     if(i==m-1 && j==n-1)return grid[i][j];
+
+     if(i>=m || j>=n)return 1e9;
+     if(dp[i][j]!=-1)return dp[i][j];
+     return dp[i][j]=min(path(i+1,j,m,n,dp,grid)+grid[i][j],path(i,j+1,m,n,dp,grid)+grid[i][j]);
+
     }
-    int path(int i,int j,vector<vector<int>>& grid,vector<vector<int>>& dp){
-        if(i>=grid.size() || j>=grid[0].size() || i<0 || j<0) return INT_MAX;
-        if(dp[i][j]!=-1) return dp[i][j];
-        dp[i][j] = grid[i][j] + min(path(i-1,j,grid,dp),path(i,j-1,grid,dp));
-        return dp[i][j];
+    int minPathSum(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<vector<int>>dp(m+1,vector<int> (n+1,-1));
+        return path(0,0,m,n,dp,grid);
     }
 };
