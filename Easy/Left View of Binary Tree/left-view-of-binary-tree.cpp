@@ -112,37 +112,29 @@ int main() {
 // } Driver Code Ends
 
 
-/* A binary tree node
-
-struct Node
-{
-    int data;
-    struct Node* left;
-    struct Node* right;
-    
-    Node(int x){
-        data = x;
-        left = right = NULL;
-    }
-};
- */
-;
-void cal(Node *root,int l,vector<int> &v){
+void lft(Node *root,vector<int> &v,stack<int>&st,int lvl){
     if(root==NULL)return ;
+    if(lvl==st.size()){
+        st.push(root->data);
+        v.push_back(st.top());
+        
+    }
     
-    if(v.size()==l)v.push_back(root->data);
-    
-    
-    cal(root->left,l+1,v);
-    cal(root->right,l+1,v);
-    
+    lft(root->left,v,st,lvl+1);
+    lft(root->right,v,st,lvl+1);
     
     
 }
 
-
 vector<int> leftView(Node *root)
-{ vector<int> v;
-    cal(root,0,v);
-   return v;
+{
+  vector<int> v;
+  stack<int>st;
+  int lvl=0;
+  lft(root,v,st,lvl);
+  return v;
+
+  
+  
+  
 }
